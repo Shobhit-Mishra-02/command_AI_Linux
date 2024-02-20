@@ -30,7 +30,7 @@ def get_json(input_string: str):
         json_data = json.loads(input_string)
         return json_data
     except json.JSONDecoder as e:
-        print(f"Error decoding JSON string: {e}")
+        print(FAIL + f"Error decoding JSON string: {e}" + FAIL)
         return None
 
 
