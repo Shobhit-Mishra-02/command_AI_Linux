@@ -1,5 +1,4 @@
 import json
-import logging
 import os
 
 import replicate
@@ -44,7 +43,11 @@ def make_request(prompt: str):
     return output
 
 
-logging.basicConfig(filename="commAI.log", level=logging.DEBUG)
+def display_output(stream):
+    for data in stream:
+        print("Desc: ", data["desc"])
+        print("Command: ", data["command"])
+
 
 question = input("Enter your query: ")
 
@@ -63,4 +66,5 @@ GIVEN DATA
 question: """ + question
 
 output_string = make_request(prompt)
-print(get_json(output_string))
+output_json = get_json(output_string)
+display_output(output_json)
