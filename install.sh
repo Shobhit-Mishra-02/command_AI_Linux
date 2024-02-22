@@ -55,7 +55,7 @@ cd $CURR_LOCATION
 
 # copy the askCommAI.sh script to inside the bin folder
 cp askCommAI.sh "$HOME/bin/askCommAI.sh"
-chmod +x askCommAI.sh
+chmod +x "$HOME/bin/askCommAI.sh"
 
 echo "Finally, placed the askCommAI.sh file inside the bin"
 echo "RUN: souce askCommAI.sh"
