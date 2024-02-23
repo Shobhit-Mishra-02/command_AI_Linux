@@ -1,42 +1,39 @@
-import json
 import os
+import sys
+import time
 
 import replicate
 from dotenv import load_dotenv
+from termcolor import colored
 
 load_dotenv()  # loading .env variables
 
 # colors for the console print statements
-HEADER = '\033[95m'
-OKBLUE = '\033[94m'
-OKCYAN = '\033[96m'
-OKGREEN = '\033[92m'
-WARNING = '\033[93m'
-FAIL = '\033[91m'
-ENDC = '\033[0m'
-BOLD = '\033[1m'
-UNDERLINE = '\033[4m'
+HEADER = "magenta"
+OKBLUE = "blue"
+WARNING = "yellow"
+OUTPUT = "green"
+FAIL = "red"
 
 # Get your api token through your replicate account
 REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN")
 
 
-# converts a string into a JSON format
-def get_json(input_string: str):
+# writing text on the console with type writer effect.
+def type_write(text: str, delay: float = 0.05):
 
-    input_string = input_string.strip()
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
 
-    try:
-        json_data = json.loads(input_string)
-        return json_data
-    except json.JSONDecoder as e:
-        print(FAIL + f"Error decoding JSON string: {e}" + FAIL)
-        return None
+    print("\n")
 
 
 # makes request to the model with the given prompt
 def make_request(prompt: str):
     if not prompt:
+        print(colored("No prompt was provied !!", FAIL))
         return None
 
     # model used meta/llama-2-70b-chat, search it on replicate
@@ -62,51 +59,20 @@ def make_request(prompt: str):
     return output
 
 
-# displays the output of the stream
-# the stream should be in the proper JSON.
-def display_output(stream):
-
-    # if the stream does not have any data
-    # then, just print a statement and return from the function
-    if len(stream) == 0:
-        print(FAIL + "No suitable output found !!!" + FAIL)
-        return
-
-    # otherwise loop through the JSON stream and
-    # print the desc and commands one by one
-    for data in stream:
-        print(OKBLUE + data["desc"] + OKBLUE)
-        print(OKGREEN + data["command"] + OKGREEN)
-
-
 # asking for the question
-question = input(HEADER + "Enter your query: " + HEADER)
+question_text = colored("commAI - Enter your query: ", "cyan")
+question = input(question_text)
 
-print("\n")
+print(colored("Please wait...", OKBLUE))
 
 # prompt which needs to submit to the model.
 prompt = """
-A question will be given related to linux commands, you duty is to create a JSON which indicates the sequence of commands which need to run to solve the question. 
+A question will be given related to linux commands, your duty is to create a concise answer and keep the output as small as possible. keep it in points and do not add any markdown.
 
-THE OUTPUT SHOULD BE IN JSON, NO NEED TO ADD ANY OTHER CHARACTER WHICH CORRUPT THE JSON. THE JSON SHOULD HAVE ALL THE COMMANDS IN THE RIGHT SEQUENCE. DONOT WRITE ANY TEXT WHICH LIES OUTSITE THE JSON.
-
-JSON FORMAT: [{"desc":"command_description", "command":"linux_command"}]
-
-IF the question does not make any sence so return an empty JSON.
-
-EXAMPLE:
-let's say given question: How to display content in a folder?
-output: [{"desc":"this commands displays content in the folder", "command":"ls"}]
-
-GIVEN DATA
-question: """ + question
+Question: """ + question
 
 
 # first, making the request to the model
 output_string = make_request(prompt)
 
-# second, then converting the string into valid JSON
-output_json = get_json(output_string)
-
-# finally, display the data
-display_output(output_json)
+type_write(colored(output_string, OUTPUT))
