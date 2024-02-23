@@ -58,5 +58,5 @@ cp askCommAI.sh "$HOME/bin/askCommAI.sh"
 chmod +x "$HOME/bin/askCommAI.sh"
 
 echo "Finally, placed the askCommAI.sh file inside the bin"
-echo "RUN: souce askCommAI.sh"
+echo "RUN: askCommAI.sh"
 echo "BEST OF LUCK !!"
