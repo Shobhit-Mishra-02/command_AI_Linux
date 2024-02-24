@@ -1,5 +1,9 @@
 #! /bin/bash
 
+# color codes
+GREEN="\e[32m"
+ENDCOLOR="\e[0m"
+
 CURR_LOCATION=$(pwd) # this will hold the current location of the user
 
 # Check if the user's home directory has a bin folder, if not, create it
@@ -48,7 +52,7 @@ deactivate # deactivating the virtual env
 
 # now, creating a .env file which contains the REPLICATE_API_TOKEN
 touch .env
-.env<"REPLICATE_API_TOKEN=$REPLICATE_API_TOKEN"
+echo "REPLICATE_API_TOKEN=$REPLICATE_API_TOKEN" > .env
 
 # comming back to the initial location
 cd $CURR_LOCATION 
@@ -57,6 +61,7 @@ cd $CURR_LOCATION
 cp askCommAI.sh "$HOME/bin/askCommAI.sh"
 chmod +x "$HOME/bin/askCommAI.sh"
 
-echo "Finally, placed the askCommAI.sh file inside the bin"
-echo "RUN: askCommAI.sh"
-echo "BEST OF LUCK !!"
+echo -e "${GREEN}Installation is completed${ENDCOLOR}"
+echo -e "${GREEN}Finally, placed the askCommAI.sh file inside the bin${ENDCOLOR}"
+echo -e "${GREEN}RUN: askCommAI.sh${ENDCOLOR}"
+echo -e "${GREEN}BEST OF LUCK !!${EDNCOLOR}"
