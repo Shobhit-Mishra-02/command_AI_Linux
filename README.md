@@ -7,3 +7,25 @@ With our simple script, forgetting commands is a thing of the past. Just call up
 Gone are the days of frantic Googling or thumbing through lengthy manuals. Now, you can stay focused and productive without ever leaving your terminal window.
 
 Let CommandAI be your trusty companion in navigating the vast world of Linux commands. Happy coding! 🚀✨
+
+> Note: it is only for linux os
+
+# Installation process
+
+```bash
+
+# clone the repo
+git clone git@github.com:Shobhit-Mishra-02/command_AI_Linux.git
+cd command_AI_Linux
+
+# Get your REPLICATE_API_TOKEN from https://replicate.com/
+# then, start the install script
+source install.sh
+
+# after runing install.sh, the script will ask for your REPLICATE_API_TOKEN
+
+# After successful installation,
+# run this command
+askCommAI.sh # to see the magic
+
+```
