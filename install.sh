@@ -41,7 +41,7 @@ echo "Copy commandAI.py and requirements.txt files to the $HOME/bin/$FOLDER_NAME
 cd "$HOME/bin/$FOLDER_NAME"
 
 echo "Creating the virtual env"
-python -m venv env
+python3 -m venv env
 
 source env/bin/activate # this will activate the virtual env
 
