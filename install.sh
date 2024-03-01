@@ -13,8 +13,8 @@ then
     echo "Creating bin directory in $HOME"
 fi
 
-# Take input for the REPLICATE_API_TOKEN
-read -p "Enter REPLICATE_API_TOKEN: " REPLICATE_API_TOKEN
+# Take input for the OPENAI_API_KEY
+read -p "Enter OPENAI_API_KEY: " OPENAI_API_KEY
 
 
 # name of the package folder, which will be placed inside the /bin folder of user's home directory
@@ -50,9 +50,9 @@ pip install -r requirements.txt # starting the installation of packages
 
 deactivate # deactivating the virtual env
 
-# now, creating a .env file which contains the REPLICATE_API_TOKEN
+# now, creating a .env file which contains the OPENAI_API_KEY
 touch .env
-echo "REPLICATE_API_TOKEN=$REPLICATE_API_TOKEN" > .env
+echo "OPENAI_API_KEY=$OPENAI_API_KEY" > .env
 
 # comming back to the initial location
 cd $CURR_LOCATION 
